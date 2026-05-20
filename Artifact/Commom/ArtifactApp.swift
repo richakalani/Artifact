@@ -7,15 +7,22 @@
 
 import SwiftUI
 import CoreData
+import FirebaseCore
 
 @main
 struct ArtifactApp: App {
+    @AppStorage("isOnboarded") var isOnboarded: Bool = false
     let persistenceController = PersistenceController.shared
+    
+    init() {
+           FirebaseApp.configure()
+       }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ArtifactLoginView(isOnboarded: $isOnboarded)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
+
