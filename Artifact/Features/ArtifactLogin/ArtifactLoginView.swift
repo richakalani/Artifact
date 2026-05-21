@@ -62,8 +62,11 @@ struct ArtifactLoginView: View {
                         .font(.subheadline)
                         .foregroundStyle(.gray)
                         Button("Continue as Guest") {
-                            // navigate to main screen
+                            viewModel.isGuest = true
                         }
+                        .navigationDestination(isPresented: $viewModel.isGuest, destination: {
+                            ArtifactNewsFeedView()
+                        })
                         .font(.subheadline)
                         .foregroundStyle(.gray)
                     }

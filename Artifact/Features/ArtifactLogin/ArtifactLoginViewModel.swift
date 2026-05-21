@@ -16,6 +16,7 @@ class ArtifactLoginViewModel {
     var email: String = ""
     var isLogIn: Bool = false
     var isEmailPasswordEmpty: Bool = false
+    var isGuest: Bool = false
     
     func signUp(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in

@@ -12,7 +12,6 @@ import FirebaseCore
 @main
 struct ArtifactApp: App {
     @AppStorage("isOnboarded") var isOnboarded: Bool = false
-    let persistenceController = PersistenceController.shared
     
     init() {
            FirebaseApp.configure()
@@ -20,8 +19,12 @@ struct ArtifactApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ArtifactLoginView(isOnboarded: $isOnboarded)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if isOnboarded {
+                ArtifactNewsFeedView()
+            } else {
+                ArtifactLoginView(isOnboarded: $isOnboarded)
+            }
+            
         }
     }
 }
