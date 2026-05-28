@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ArtifactLoginView: View {
-    @Binding var isOnboarded: Bool
+    @AppStorage("isOnboarded") var isOnboarded: Bool = false
     @State private var viewModel = ArtifactLoginViewModel()
     @State private var password: String = ""
     var body: some View {
@@ -49,7 +49,7 @@ struct ArtifactLoginView: View {
                         }
                         .buttonStyle(.borderedProminent)
                         .navigationDestination(isPresented: $viewModel.isSignedIn) {
-                            ArtifactTopicPickerView()
+                            ArtifactTopicPickerView(viewModel: ArtifactTopicPickerViewModel(isProfilePage: false))
                         }
                         if viewModel.isEmailPasswordEmpty {
                             Text("Enter email id and password to continue")

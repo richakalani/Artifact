@@ -17,6 +17,7 @@ class ArtifactLoginViewModel {
     var isLogIn: Bool = false
     var isEmailPasswordEmpty: Bool = false
     var isGuest: Bool = false
+    private var authListener: AuthStateDidChangeListenerHandle?
     
     func signUp(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
@@ -38,6 +39,18 @@ class ArtifactLoginViewModel {
                     self?.isSignedIn = true
                 }
             }
+        }
+    }
+    func startListening() {
+        authListener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
+            DispatchQueue.main.async {
+                self?.isSignedIn = user != nil
+            }
+        }
+    }
+    func stopListening() {
+        if let handle = authListener {
+            Auth.auth().removeStateDidChangeListener(handle)
         }
     }
 }

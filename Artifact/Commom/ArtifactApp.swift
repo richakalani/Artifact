@@ -11,7 +11,8 @@ import FirebaseCore
 
 @main
 struct ArtifactApp: App {
-    @AppStorage("isOnboarded") var isOnboarded: Bool = false
+   // @AppStorage("isOnboarded") var isOnboarded: Bool = false
+    @State private var viewModel = ArtifactLoginViewModel()
     
     init() {
            FirebaseApp.configure()
@@ -19,10 +20,10 @@ struct ArtifactApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if isOnboarded {
+            if viewModel.isSignedIn {
                 ArtifactNewsFeedView()
             } else {
-                ArtifactLoginView(isOnboarded: $isOnboarded)
+                ArtifactLoginView()
             }
             
         }

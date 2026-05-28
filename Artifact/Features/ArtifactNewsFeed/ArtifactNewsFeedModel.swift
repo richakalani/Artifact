@@ -13,13 +13,18 @@ struct NewsDataModel: Codable {
 }
 
 // MARK: - Article
-struct Article: Codable {
+struct Article: Codable, Identifiable {
     let id, title, description, content: String?
     let url: String?
     let image: String?
     let publishedAt: String?
     let lang: String?
     let source: Source?
+    var isArticleSaved: Bool = false
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, title, description, content, url, image, publishedAt, lang, source
+    }
 }
 
 // MARK: - Source

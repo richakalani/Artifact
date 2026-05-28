@@ -10,11 +10,13 @@
 		5669D8722FBDC824008D493B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5669D8712FBDC823008D493B /* GoogleService-Info.plist */; };
 		5669D8752FBDC8BA008D493B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5669D8742FBDC8BA008D493B /* FirebaseAuth */; };
 		5669D8772FBDC8BA008D493B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5669D8762FBDC8BA008D493B /* FirebaseFirestore */; };
+		56A4E6C82FC8ED1B00AA1E4B /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56A4E6C72FC8ED1B00AA1E4B /* Secrets.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5669D8522FBDBCCD008D493B /* Artifact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artifact.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669D8712FBDC823008D493B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56A4E6C72FC8ED1B00AA1E4B /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -41,6 +43,7 @@
 		5669D8492FBDBCCD008D493B = {
 			isa = PBXGroup;
 			children = (
+				56A4E6C72FC8ED1B00AA1E4B /* Secrets.plist */,
 				5669D8542FBDBCCD008D493B /* Artifact */,
 				5669D8532FBDBCCD008D493B /* Products */,
 				5669D8712FBDC823008D493B /* GoogleService-Info.plist */,
@@ -124,6 +127,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56A4E6C82FC8ED1B00AA1E4B /* Secrets.plist in Resources */,
 				5669D8722FBDC824008D493B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

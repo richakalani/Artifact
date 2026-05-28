@@ -8,24 +8,48 @@ import Foundation
 
 @Observable
 class ArtifactTopicPickerViewModel {
-    var categories: [String] = ["General", "World", "Nation", "Business", "Technlogy", "Entertainment", "Sports", "Science", "Health"]
-    var savedCategories: [ArtifactTopicPickerModel] = []
+    static let categoriesDefaultsKey = "Categories"
+    var allCategories: [ArtifactTopicPickerModel] = [
+        ArtifactTopicPickerModel(id: UUID(), category: "General", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "World", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "Nation", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "Business", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "Technlogy", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "Entertainment", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "Sports", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "Science", isSelected: false),
+        ArtifactTopicPickerModel(id: UUID(), category: "Health", isSelected: false)
+    ]
+    var isProfilePage: Bool
     var enableNextButton = false
     var navigateToNewsFeed = false
-   
+    init(isProfilePage: Bool) {
+        self.isProfilePage = isProfilePage
+    }
     func saveCategories(category: String) {
-        if savedCategories.contains(where: {$0.category == category}) {
-            savedCategories.removeAll(where: {$0.category == category})
-            print("Category removed \(category)")
-        } else {
-            savedCategories.append(ArtifactTopicPickerModel(category: category, isSelected: true))
-            print("Category saved \(category)")
+        if let index = allCategories.firstIndex(where: { $0.category == category }) {
+            allCategories[index].isSelected.toggle()
+            if allCategories[index].isSelected == true {
+                updateEnableNext()
+            } else {
+                enableNextButton = false
+            }
+                
         }
-        if savedCategories.count > 2 {
-            enableNextButton = true
-        } else {
-            enableNextButton = false
+    }
+    
+    private func updateEnableNext() {
+        let selectedCount = allCategories.filter { $0.isSelected }.count
+        enableNextButton = selectedCount >= 3
+    }
+    
+    func saveButtonAction() {
+        do {
+            let data = try JSONEncoder().encode(allCategories)
+            UserDefaults.standard.set(data, forKey: Self.categoriesDefaultsKey)
+            navigateToNewsFeed = true
+        } catch {
+            // Handle encoding error
         }
-        print(savedCategories)
     }
 }
