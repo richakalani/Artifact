@@ -5,6 +5,7 @@
 //  Created by Richa Kalani on 21/05/26.
 //
 import Foundation
+import FirebaseAuth
 
 @Observable
 class ArtifactTopicPickerViewModel {
@@ -23,6 +24,8 @@ class ArtifactTopicPickerViewModel {
     var isProfilePage: Bool
     var enableNextButton = false
     var navigateToNewsFeed = false
+    var profileCategories: [ArtifactTopicPickerModel] = []
+    var isLoggedOutClicked = false
     init(isProfilePage: Bool) {
         self.isProfilePage = isProfilePage
     }
@@ -47,9 +50,18 @@ class ArtifactTopicPickerViewModel {
         do {
             let data = try JSONEncoder().encode(allCategories)
             UserDefaults.standard.set(data, forKey: Self.categoriesDefaultsKey)
-            navigateToNewsFeed = true
         } catch {
             // Handle encoding error
         }
+    }
+    func getCategories() {
+        if let data = UserDefaults.standard.data(forKey: Self.categoriesDefaultsKey) {
+            let allCategories = (try? JSONDecoder().decode([ArtifactTopicPickerModel].self, from: data)) ?? []
+            print(allCategories)
+            self.allCategories = allCategories
+        }
+    }
+    func logOut() {
+        try? Auth.auth().signOut()
     }
 }

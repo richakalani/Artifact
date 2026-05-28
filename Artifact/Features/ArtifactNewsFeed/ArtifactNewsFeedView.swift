@@ -47,6 +47,9 @@ struct ArtifactNewsFeedView: View {
             .navigationDestination(isPresented: $savedNewsviewModel.openArticlePage) {
                 ArtifactArticleDetailView(viewModel: newsViewModel)
             }
+            .navigationDestination(isPresented: $topicPickerViewModel.isLoggedOutClicked, destination: {
+               ArtifactLoginView()
+            })
         }
         .task {
             await newsViewModel.performOnAppear()
